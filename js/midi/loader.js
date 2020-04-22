@@ -53,12 +53,8 @@ MIDI.Player = MIDI.Player || {};
 				api = opts.api;
 			} else if (supports[hash.substr(1)]) {
 				api = hash.substr(1);
-			} else if (supports.webmidi) {
-				api = 'webmidi';
-			} else if (window.AudioContext) { // Chrome
+			} else if (supports['webaudio']) {
 				api = 'webaudio';
-			} else if (window.Audio) { // Firefox
-				api = 'audiotag';
 			}
 
 			if (connect[api]) {
@@ -113,15 +109,6 @@ MIDI.Player = MIDI.Player || {};
 	};
 
 	var connect = {
-		webmidi: function(opts) {
-			// cant wait for this to be standardized!
-			root.WebMIDI.connect(opts);
-		},
-		audiotag: function(opts) {
-			// works ok, kinda like a drunken tuna fish, across the board
-			// http://caniuse.com/audio
-			requestQueue(opts, 'AudioTag');
-		},
 		webaudio: function(opts) {
 			// works awesome! safari, chrome and firefox support
 			// http://caniuse.com/web-audio
