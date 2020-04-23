@@ -65,14 +65,12 @@
 			var bufferId = instrument + '' + noteId;
 			var buffer = audioBuffers[bufferId];
 			if (!buffer) {
-// 				console.log(MIDI.GM.byId[instrument].id, instrument, channelId);
+				console.log("Instrument not found:", MIDI.GM.byId[instrument].id, instrument, channelId);
 				return;
 			}
 
 			/// convert relative delay to absolute delay
-			// if (delay < ctx.currentTime) {
 			delay += ctx.currentTime;
-			// }
 		
 			/// create audio buffer
 			if (useStreamingBuffer) {
@@ -184,10 +182,7 @@
 
 		midi.stopAllNotes = function() {
 			for (var sid in sources) {
-				var delay = 0;
-				// if (delay < ctx.currentTime) {
-				delay += ctx.currentTime;
-				// }
+				var delay = ctx.currentTime;
 				var source = sources[sid];
 				source.gain.linearRampToValueAtTime(1, delay);
 				source.gain.linearRampToValueAtTime(0, delay + 0.3);
