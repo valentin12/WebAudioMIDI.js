@@ -38,7 +38,7 @@
 	<div style="margin-bottom: 50px; border: 1px solid #000; background: rgba(255,255,255,0.5); border-radius: 11px; float: left; width: 800px; padding-bottom: 15px; position: relative; z-index: 2;">
 		<div class="player" style="height: 42px; box-shadow: 0 -1px #000; margin-bottom: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
 			<div style="margin: 0 auto; width: 160px; float: right;">
-				<input type="image" src="./images/pause.png" align="absmiddle" value="pause" onclick="pausePlayStop()" id="pausePlayStop">
+				<input type="image" src="./images/play.png" align="absmiddle" value="pause" onclick="pausePlayStop()" id="pausePlayStop">
 				<input type="image" src="./images/stop.png" align="absmiddle" value="stop" onclick="pausePlayStop(true)">
 				<input type="image" src="./images/backward.png" align="absmiddle" value="stop" onclick="player.getNextSong(-1);">
 				<input type="image" src="./images/forward.png" align="absmiddle" value="stop" onclick="player.getNextSong(+1);">
@@ -142,7 +142,7 @@
 				/// this sets up the MIDI.Player and gets things going...
 				player = MIDI.Player;
 				player.timeWarp = 1; // speed the song is played back
-				player.loadFile(song[songid++ % song.length], player.start);
+				player.loadFile(song[songid++ % song.length], function () {});
 
 				/// control the piano keys colors
 				var colorMap = MIDI.Synesthesia.map();
