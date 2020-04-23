@@ -64,7 +64,7 @@
       }
     };
 
-    var noteOn = function (channelId, noteId, velocity, timestamp) {
+    midi._noteOn = function (channelId, noteId, velocity, timestamp) {
 
       /// check whether the note exists
       var channel = root.channels[channelId];
@@ -116,10 +116,10 @@
         source.start(timestamp || 0);
       }
       ///
-      if (sources[channelId + '' + noteId]) {
-        // if notes is already played, stop that note first
-        sources[channelId + '' + noteId].stop()
-      }
+      // if (sources[channelId + '' + noteId]) {
+      //   // if notes is already played, stop that note first
+      //   sources[channelId + '' + noteId].stop()
+      // }
       sources[channelId + '' + noteId] = source;
       ///
       return source;
@@ -128,16 +128,16 @@
     midi.noteOn = function (channelId, noteId, velocity, delay) {
       if ((delay || 0) > 0) {
         schedule({
-          call: noteOn,
+          call: midi._noteOn,
           args: [channelId, noteId, velocity],
           timestamp: ctx.currentTime + delay
         });
       } else {
-      	noteOn(channelId, noteId, velocity, ctx.currentTime)
+        midi._noteOn(channelId, noteId, velocity, ctx.currentTime)
       }
     };
 
-    var noteOff = function (channelId, noteId, timestamp) {
+    midi._noteOff = function (channelId, noteId, timestamp) {
       /// check whether the note exists
       var channel = root.channels[channelId];
       var instrument = channel.instrument;
@@ -152,7 +152,7 @@
             // add { 'metadata': { release: 0.3 } } to soundfont files
             var gain = source.gainNode.gain;
             gain.linearRampToValueAtTime(gain.value, timestamp);
-            gain.linearRampToValueAtTime(-1.0, timestamp + 0.05);
+            gain.linearRampToValueAtTime(-1.0, timestamp + 0.3);
           }
           ///
           if (useStreamingBuffer) {
@@ -181,12 +181,12 @@
     midi.noteOff = function (channelId, noteId, delay) {
     	if ((delay || 0) > 0) {
 				schedule({
-					call: noteOff,
+					call: midi._noteOff,
 					args: [channelId, noteId],
 					timestamp: ctx.currentTime + delay
 				});
 			} else {
-    		noteOff(channelId, noteId, ctx.currentTime)
+    		midi._noteOff(channelId, noteId, ctx.currentTime)
 			}
     };
 

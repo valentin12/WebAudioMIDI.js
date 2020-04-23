@@ -303,7 +303,7 @@ var startAudio = function(currentTime, fromCache, onsuccess) {
 		///
 		var channelId = event.channel;
 		var channel = MIDI.channels[channelId];
-		var delay = (currentTime + foffset + midi.startDelay) / 1000;
+		var delay = ctx.currentTime + (currentTime + foffset + midi.startDelay) / 1000;
 		var queueTime = queuedTime - offset + midi.startDelay;
 		switch (event.subtype) {
 			case 'controller':
@@ -321,7 +321,7 @@ var startAudio = function(currentTime, fromCache, onsuccess) {
 				eventQueue.push({
 				    event: event,
 				    time: queueTime,
-				    source: MIDI.noteOn(channelId, event.noteNumber, event.velocity, delay),
+				    source: MIDI._noteOn(channelId, event.noteNumber, event.velocity, delay),
 				    interval: scheduleTracking(channelId, note, queuedTime + midi.startDelay, offset - foffset, 144, event.velocity)
 				});
 				messages++;
@@ -332,7 +332,7 @@ var startAudio = function(currentTime, fromCache, onsuccess) {
 				eventQueue.push({
 				    event: event,
 				    time: queueTime,
-				    source: MIDI.noteOff(channelId, event.noteNumber, delay),
+				    source: MIDI._noteOff(channelId, event.noteNumber, delay),
 				    interval: scheduleTracking(channelId, note, queuedTime, offset - foffset, 128, 0)
 				});
 				break;
