@@ -1,3 +1,11 @@
+# WebAudioMIDI.js
+This library is based on [MIDI.js](https://github.com/mudcube/MIDI.js). Legacy code was removed,
+now it should work with any current browser that supports `AudioContext` or `webkitAudioContext`.
+
+The scheduling for `noteOn`, `noteOff`, ... was rewritten according to
+[A Tale of Two Clocks](https://www.html5rocks.com/en/tutorials/audio/scheduling/).
+Additionally, some bugs concerning delays have been fixed.
+
 ## Code examples - from the repo
 
 * [Basic](./examples/Basic.html) - the most basic implementation.
@@ -7,15 +15,10 @@
 ## Demos
 
 * [3D Piano Player w/ Three.js](http://www.rgba.org/r3d/3d-piano-player/) by Borja Morales @reality3d
-* [Brite Lite](http://labs.uxmonk.com/brite-lite/) by Daniel Christopher @uxmonk
 * [Color Piano](http://mudcu.be/piano) by Michael Deal @mudcube
 * [Euphony 3D Piano](http://qiao.github.com/euphony/) by Xueqiao Xu @qiao
-* [Gbloink!](http://gbloink.com/alpha/) by Phil Jones
 * [Piano Typewriter](http://www.picatino.com/piano_typewriter/) by Andrew Levine
-* [Ragamroll](http://online-compute.rhcloud.com/ragamroll/) by Mani Balasubramanian
-* [Simon Says](http://labs.uxmonk.com/simon-says/) by Daniel Christopher @uxmonk
 * [Spiral Keyboard](http://spiral.qet.me/) by Patrick Snels
-* [VexFlow](http://my.vexflow.com/articles/53) by Mohit Muthanna @11111110b
 
 ## Related repositories
 
@@ -206,9 +209,7 @@ MIDI.setEffects([
 
 ### Many thanks to the authors of these libraries
 
-* [Web MIDI API](http://webaudio.github.io/web-midi-api/): W3C proposal by Jussi Kalliokoski & Chris Wilson
 * [Web Audio API](https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html): W3C proposal by Chris Rogers
-* [&lt;audio&gt;](http://dev.w3.org/html5/spec/Overview.html): HTML5 specs
 * Flash package: [SoundManager2](http://www.schillmania.com/projects/soundmanager2/) by [Scott Schiller](http://schillmania.com)
 * [jasmid](https://github.com/gasman/jasmid): Reads MIDI file byte-code, and translats into a Javascript array.
 * [base642binary.js](http://blog.danguer.com/2011/10/24/base64-binary-decoding-in-javascript/): Cleans up XML base64-requests for Web Audio API.
