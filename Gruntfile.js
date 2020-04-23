@@ -20,9 +20,7 @@ module.exports = function (grunt) {
 				'js/midi/gm.js',
 				'js/midi/loader.js',
 				'js/midi/player.js',
-				'js/midi/plugin.audiotag.js',
 				'js/midi/plugin.webaudio.js',
-				'js/midi/plugin.webmidi.js',
 //				'js/midi/synesthesia.js', // optional
 				'js/util/dom_request_xhr.js', // req when using XHR
 				'js/util/dom_request_script.js', // req otherwise
