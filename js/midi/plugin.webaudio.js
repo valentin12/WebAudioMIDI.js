@@ -116,6 +116,10 @@
         source.start(timestamp || 0);
       }
       ///
+      if (sources[channelId + '' + noteId]) {
+        // if notes is already played, stop that note first
+        sources[channelId + '' + noteId].stop()
+      }
       sources[channelId + '' + noteId] = source;
       ///
       return source;
@@ -148,7 +152,7 @@
             // add { 'metadata': { release: 0.3 } } to soundfont files
             var gain = source.gainNode.gain;
             gain.linearRampToValueAtTime(gain.value, timestamp);
-            gain.linearRampToValueAtTime(-1.0, timestamp + 0.3);
+            gain.linearRampToValueAtTime(-1.0, timestamp + 0.05);
           }
           ///
           if (useStreamingBuffer) {
@@ -209,7 +213,7 @@
       }
       for (let sid in sources) {
         // needs extra loop, other loop breaks when adding this... (don't know why)
-        sources[sid].gain.linearRampToValueAtTime(0, ctx.currentTime + 0.05);
+        sources[sid].gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.05);
       }
       sources = [];
     };
