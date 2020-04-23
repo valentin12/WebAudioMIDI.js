@@ -234,12 +234,7 @@ var scheduleTracking = function(channel, note, currentTime, offset, message, vel
 };
 
 var getContext = function() {
-	if (MIDI.api === 'webaudio') {
-		return MIDI.WebAudio.getContext();
-	} else {
-		midi.ctx = {currentTime: 0};
-	}
-	return midi.ctx;
+	return MIDI.WebAudio.getContext();
 };
 
 var getLength = function() {
@@ -287,13 +282,6 @@ var startAudio = function(currentTime, fromCache, onsuccess) {
 	///
 	var interval = eventQueue[0] && eventQueue[0].interval || 0;
 	var foffset = currentTime - midi.currentTime;
-	///
-	if (MIDI.api !== 'webaudio') { // set currentTime on ctx
-		var now = getNow();
-		__now = __now || now;
-		ctx.currentTime = (now - __now) / 1000;
-	}
-	///
 	midi.ctxStartTime = startTime = ctx.currentTime;
 	midi.playingStartTime = Date.now() - midi.ctxStartTime*10 ;
 	///
@@ -315,7 +303,7 @@ var startAudio = function(currentTime, fromCache, onsuccess) {
 		///
 		var channelId = event.channel;
 		var channel = MIDI.channels[channelId];
-		var delay = ctx.currentTime + ((currentTime + foffset + midi.startDelay) / 1000);
+		var delay = (currentTime + foffset + midi.startDelay) / 1000;
 		var queueTime = queuedTime - offset + midi.startDelay;
 		switch (event.subtype) {
 			case 'controller':
@@ -352,7 +340,6 @@ var startAudio = function(currentTime, fromCache, onsuccess) {
 				break;
 		}
 	}
-	///
 	onsuccess && onsuccess(eventQueue);
 };
 
