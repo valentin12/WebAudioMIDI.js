@@ -19,6 +19,7 @@ Additionally, some bugs concerning delays have been fixed.
 * [Euphony 3D Piano](http://qiao.github.com/euphony/) by Xueqiao Xu @qiao
 * [Piano Typewriter](http://www.picatino.com/piano_typewriter/) by Andrew Levine
 * [Spiral Keyboard](http://spiral.qet.me/) by Patrick Snels
+* [Dodeca Course](https://dodeca.wavel.de) Online Functional Ear Training Course
 
 ## Related repositories
 
