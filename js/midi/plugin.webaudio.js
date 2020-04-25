@@ -115,11 +115,10 @@
       } else {
         source.start(timestamp || 0);
       }
-      ///
-      // if (sources[channelId + '' + noteId]) {
-      //   // if notes is already played, stop that note first
-      //   sources[channelId + '' + noteId].stop()
-      // }
+      if (sources[channelId + '' + noteId]) {
+        // if notes is already played, stop that note first
+        sources[channelId + '' + noteId].stop()
+      }
       sources[channelId + '' + noteId] = source;
       ///
       return source;
